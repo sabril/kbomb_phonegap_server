@@ -6,7 +6,9 @@ KbombPhonegapServer::Application.routes.draw do
     resources :photos
   end
 
-  devise_for :users, :controllers => {:sessions => 'api/sessions'} do
+  devise_for :users
+
+  devise_for :users, :controllers => {:sessions => 'api/sessions'}, :skip => [:sessions] do
     match 'api/login' => 'api/sessions#create', :via => [:get, :post]
     get 'api/logout' => 'api/sessions#destroy', :as => :destroy_user_session
   end
